@@ -2,10 +2,10 @@
 name: handoff-prompt
 description: >
   Distill the conclusion of a discussion (usually after /grill me) into a high-level
-  implementation prompt. Deliberately captures only the background and the intended
-  approach, leaving out file-, function-, or field-level detail so the implementing
-  session still has room to explore. Use when a direction has been decided and you
-  want to hand it off to another session for implementation.
+  implementation prompt, written out as a prompt.md file. Deliberately captures only
+  the background and the intended approach, leaving out file-, function-, or field-level
+  detail so the implementing session still has room to explore. Use when a direction has
+  been decided and you want to hand it off to another session for implementation.
 ---
 
 # Skill: Handoff Prompt
@@ -25,7 +25,12 @@ The user says something like "turn this into a prompt", "write it up as md", "ha
 - **Background must stand on its own** — someone who wasn't in the discussion should still understand why this matters.
 - Write in the user's working language (default zh-TW unless the user asks otherwise).
 
-## Output Structure
+## Output
+
+Write the result to a **`prompt.md`** file at the project root (overwrite if it
+already exists). **Do not** dump the full document inline in the chat — after
+writing the file, only reply with the file path and a one- or two-line summary of
+what it covers. The structure below is the content of that file.
 
 Add or drop sections to fit the conclusion, but roughly:
 
