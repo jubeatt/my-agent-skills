@@ -26,7 +26,15 @@ ln -s ~/Projects/my-agent-skills/.agents/skills ~/.kiro/skills
 
 # 3.（選擇性）把第三方 skill 更新到最新
 cd ~/Projects/my-agent-skills && npx skills update
+
+# 4. 啟用 commit 後自動同步 Codex skills
+git config core.hooksPath .githooks
+chmod +x .githooks/post-commit
 ```
+
+啟用後，每次 commit 完成時會自動執行
+`scripts/sync-codex-skills.sh`，將 `.agents/skills/` 同步到 Codex 的 skills
+目錄。
 
 ## 日常維護
 
