@@ -89,7 +89,7 @@ status: Planned | In progress | Completed
 
 ## 編輯保護旗標
 
-`.plan/<slug>/task-edit-approved`（純文字、無副檔名、內容 `false`）：建立後 agent 要編輯 task.md 會被 hook 擋下，直到 user 把內容改成 `true`——給 user 鎖住計畫、防止被擅自改動的開關。
+`.plan/<slug>/plan-edit-approved`（純文字、無副檔名、內容 `false`）：建立後 agent 要編輯 `.plan/<slug>/` 底下的任何檔案（task.md、context.md、question.md、term.md 等）都會被 hook 擋下，直到 user 把內容改成 `true`——給 user 鎖住整份計畫、防止被擅自改動的開關。
 
 task.md 產出後決定是否建立此檔：
 
