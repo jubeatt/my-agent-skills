@@ -36,8 +36,9 @@ description: 把某段開發的實際實作回寫同步到 .plan/<slug>/ 的計�
 
 ### 2. 從 git 讀出這段做了什麼
 
-預設看最新一筆 commit：先 `git status` + `git log --oneline -n 5` 確認 HEAD 就是要同步的那筆，再 `git show HEAD`。
-使用者若指定別的 commit 就用指定的。有相關未提交變更則一併看 `git diff HEAD`，並在回報時點明。
+同步範圍**一律由使用者指定 commit hash**。**沒給就直接停止並請使用者提供，不要自行推測範圍
+（例如改用 HEAD／最新一筆）。** 拿到 hash 後：先 `git status` + `git log --oneline -n 5` 確認範圍，
+再 `git show <hash>` 讀出這段做了什麼。有相關未提交變更則一併看 `git diff HEAD`，並在回報時點明。
 
 ### 3. 比對計畫宣稱 vs 實際實作
 
