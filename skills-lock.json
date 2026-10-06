@@ -5,25 +5,25 @@
       "source": "aviator-co/agent-plugins",
       "sourceType": "github",
       "skillPath": "av-cli/skills/av-cli/SKILL.md",
-      "computedHash": "f3e70d5bbcb624d7c8ae85d8de4eedf997b1b8d58c40e205a03fab31a2c0ea3d"
+      "computedHash": "19e7cf522efc831704b225a1340b556aa457767f6975e7f8ef73706c88a4a75a"
     },
     "caveman-commit": {
       "source": "juliusbrussee/caveman",
       "sourceType": "github",
       "skillPath": "skills/caveman-commit/SKILL.md",
-      "computedHash": "790a4eeace0be35c6691faf923518ba5bd50f1f1305d1101d09dd4971be94e00"
+      "computedHash": "b416cf134b0f33ddadeca7977aebdbb2d3db79a166d0fce2e1aabeec98132766"
     },
     "cmux": {
       "source": "manaflow-ai/cmux",
       "sourceType": "github",
       "skillPath": "skills/cmux/SKILL.md",
-      "computedHash": "f83a74295fb40f6c0f0abad386b9fa7e0305aed6789c1a94e635b367f206d94c"
+      "computedHash": "322e20f40df41cfa3e7f9bb72de7ac4fa12f97b5c6eb6126c36c60828986a3a9"
     },
     "cmux-markdown": {
       "source": "manaflow-ai/cmux",
       "sourceType": "github",
       "skillPath": "skills/cmux-markdown/SKILL.md",
-      "computedHash": "5cd75e51d5d576dffcce54abf391165005e6b0f70ab89133f4fe432cc8a00f63"
+      "computedHash": "0870025e9cc20f3a7bde8eeebfafc7a2c5e273168b5252df961acac942c26e28"
     },
     "grilling": {
       "source": "mattpocock/skills",
@@ -41,7 +41,7 @@
       "source": "microsoft/playwright-cli",
       "sourceType": "github",
       "skillPath": "skills/playwright-cli/SKILL.md",
-      "computedHash": "32cf6cf8733ae75ae41f5241347bca74459629f90bcfbd4e25540ede5d4b8f95"
+      "computedHash": "ffbd59a973d4e2c19c6ecc31254a14497069c362f1d1820b6a6cfbe62de34a73"
     },
     "vercel-composition-patterns": {
       "source": "vercel-labs/agent-skills",
@@ -59,7 +59,7 @@
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/productivity/writing-for-agents/SKILL.md",
-      "computedHash": "ccfa1e94d8f6ab5c6a1edd55293ca477faf93c39207771331efdb1e798ed21d6"
+      "computedHash": "95da47fc97af998e85b7d7e6d57b3ac76727c1e290cfe9ea09005aacb826959f"
     }
   }
 }
