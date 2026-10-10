@@ -28,8 +28,8 @@ metadata:
 
 ## Evidence
 
-- **Before:** <screenshot/output/failing test run>
-  **After:** <screenshot/output/passing test run>
+- **Before:** <output/failing test run>
+  **After:** <output/passing test run>
 
 ## Merge Danger
 
@@ -169,9 +169,9 @@ function expandSkill(command: string): string {
 
 能證明變更可用的具體證據，呈現 before 與 after。
 
-Screenshot 是 S-tier——當環境支援、而且變更是視覺性的。
+用執行型證據：測試結果、console output。用 pseudocode 呈現那個現在會失敗、修好後會通過的確切測試。
 
-執行型證據是 A-tier：測試結果、console output。用 pseudocode 呈現那個現在會失敗、修好後會通過的確切測試。
+視覺性變更另留截圖佔位，寫明該截哪個畫面、什麼狀態，由使用者自行補圖，例如 `<截圖待補：結帳頁，購物車為空時>`。
 
 ### Merge Danger
 
