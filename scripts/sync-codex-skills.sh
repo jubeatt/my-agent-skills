@@ -9,7 +9,8 @@ Sync repo skills into Codex's skills directory without touching .system.
 
 Options:
   -n, --dry-run        Show what would change without writing files
-      --prune          Remove top-level target skill directories missing from source
+      --prune          Remove top-level target skill directories missing from source (default)
+      --no-prune       Keep target skill directories missing from source
       --source <dir>   Source skills directory (default: .agents/skills)
       --target <dir>   Target skills directory (default: $CODEX_SKILLS_DIR or ~/.codex/skills)
   -h, --help           Show this help
@@ -25,7 +26,7 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 source_dir="$repo_root/.agents/skills"
 target_dir="${CODEX_SKILLS_DIR:-$HOME/.codex/skills}"
 dry_run=false
-prune=false
+prune=true
 
 while (($# > 0)); do
   case "$1" in
@@ -35,6 +36,10 @@ while (($# > 0)); do
       ;;
     --prune)
       prune=true
+      shift
+      ;;
+    --no-prune)
+      prune=false
       shift
       ;;
     --source)

@@ -34,7 +34,16 @@ chmod +x .githooks/post-commit
 
 啟用後，每次 commit 完成時會自動執行
 `scripts/sync-codex-skills.sh`，將 `.agents/skills/` 同步到 Codex 的 skills
-目錄。
+目錄。同步會保留 `.system/`，更新各 skill 的內容，並清除主 repo 已不存在的
+skill 目錄，讓 Codex 的 skills 與 `.agents/skills/` 一致。
+
+```bash
+# Preview sync and pruning
+scripts/sync-codex-skills.sh --dry-run
+
+# Update skills while keeping extra target skill directories
+scripts/sync-codex-skills.sh --no-prune
+```
 
 ## 日常維護
 
