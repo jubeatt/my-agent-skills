@@ -27,22 +27,27 @@ ln -s ~/Projects/my-agent-skills/.agents/skills ~/.kiro/skills
 # 3.（選擇性）把第三方 skill 更新到最新
 cd ~/Projects/my-agent-skills && npx skills update
 
-# 4. 啟用 commit 後自動同步 Codex skills
+# 4. 啟用 commit 後自動同步 Codex / Claude Code skills
 git config core.hooksPath .githooks
 chmod +x .githooks/post-commit
 ```
 
 啟用後，每次 commit 完成時會自動執行
-`scripts/sync-codex-skills.sh`，將 `.agents/skills/` 同步到 Codex 的 skills
-目錄。同步會保留 `.system/`，更新各 skill 的內容，並清除主 repo 已不存在的
-skill 目錄，讓 Codex 的 skills 與 `.agents/skills/` 一致。
+`scripts/sync-skills.sh`，將 `.agents/skills/` 同步到 Codex（`~/.codex/skills`）
+與 Claude Code（`~/.claude/skills`）的 skills 目錄。同步會更新各 skill 的內容，
+並清除先前由此腳本同步、但主 repo 已不存在的 skill。腳本以目標目錄中的
+`.my-agent-skills-manifest` 記錄同步過的 skill，因此不會動到其他來源的 skill
+（例如 Codex 的 `.system/`、Claude 的 `synced/`）。
 
 ```bash
 # Preview sync and pruning
-scripts/sync-codex-skills.sh --dry-run
+scripts/sync-skills.sh --dry-run
 
-# Update skills while keeping extra target skill directories
-scripts/sync-codex-skills.sh --no-prune
+# Update skills without pruning removed ones
+scripts/sync-skills.sh --no-prune
+
+# Sync to a specific target only (repeatable)
+scripts/sync-skills.sh --target ~/.claude/skills
 ```
 
 ## 日常維護
