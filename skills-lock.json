@@ -5,7 +5,7 @@
       "source": "aviator-co/agent-plugins",
       "sourceType": "github",
       "skillPath": "av-cli/skills/av-cli/SKILL.md",
-      "computedHash": "19e7cf522efc831704b225a1340b556aa457767f6975e7f8ef73706c88a4a75a"
+      "computedHash": "691259046438ea0eb1588f2639a433659b89513f2c177a3a39673d73d3415bdf"
     },
     "caveman-commit": {
       "source": "juliusbrussee/caveman",
@@ -29,13 +29,13 @@
       "source": "mattpocock/skills",
       "sourceType": "github",
       "skillPath": "skills/productivity/grilling/SKILL.md",
-      "computedHash": "4dd886b0196bf43729d954ae326016f2bd9f5f79d892500b407c33a753362f14"
+      "computedHash": "ef1641a2047b71b60f1942cd35efb47d3afc9d584dff5a0b01f8c7db923aaa08"
     },
     "herdr": {
       "source": "herdrdev/herdr",
       "sourceType": "github",
       "skillPath": "skills/herdr/SKILL.md",
-      "computedHash": "66715d76e5947497431ec0db32f2693b9c916ad799c3f32b99e6174b4b9c607f"
+      "computedHash": "72177e911f55467de8737174072ec6bb08e30bbf62bceabcb69678e944398b18"
     },
     "playwright-cli": {
       "source": "microsoft/playwright-cli",
