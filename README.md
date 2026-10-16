@@ -22,6 +22,7 @@ my-agent-skills/       │
 
 - 已正確的 link 不動，缺的補上。
 - `~/.claude/skills/` 中指向本 repo、但 skill 已不存在的 link 會被移除。
+- `npx skills add/update` 會在 repo 裡另建 `.claude/skills/`（有 `.kiro/` 時還有 `.kiro/skills/`）的 project-scope link，與上面的 link 重複，一併移除；這兩個路徑也已列入 `.gitignore`。
 - 目標位置若是實體檔案或資料夾，一律不碰，只回報並以非零狀態結束。
 
 ## 首次設定（新裝置）

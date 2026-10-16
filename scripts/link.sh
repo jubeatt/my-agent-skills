@@ -13,8 +13,14 @@ Link repo skills into each agent's skills directory. Safe to re-run.
 
 Claude Code's directory also holds skills from other sources (e.g. synced/),
 so it gets one link per skill. Links there that point into this repo but whose
-skill no longer exists are removed. Real files and directories are never
-touched; they are reported and the script exits non-zero.
+skill no longer exists are removed.
+
+`npx skills add/update` also creates project-scope links in this repo
+(.claude/skills/, .kiro/skills/) pointing back at .agents/skills/. Those
+duplicate the links above, so they are removed too.
+
+Real files and directories are never touched; they are reported and the
+script exits non-zero.
 
 Options:
   -n, --dry-run   Show what would change without writing anything
@@ -114,6 +120,24 @@ for dest in "$claude_dir"/*; do
   if [[ ! -f "$dest/SKILL.md" ]]; then
     echo "Pruning $dest"
     run rm "$dest"
+  fi
+done
+
+# Project-scope links left by `npx skills`, e.g. .claude/skills/grilling -> ../../.agents/skills/grilling
+for project_dir in "$repo_root/.claude/skills" "$repo_root/.kiro/skills"; do
+  [[ -d "$project_dir" && ! -L "$project_dir" ]] || continue
+  for dest in "$project_dir"/*; do
+    [[ -L "$dest" ]] || continue
+    target="$(readlink "$dest")"
+    [[ "$target" == ../../.agents/skills/* || "$target" == "$source_dir"/* ]] || continue
+    echo "Pruning $dest"
+    run rm "$dest"
+  done
+  # Drop the directories once empty; anything else left in them stays
+  if [[ "$dry_run" != true && -z "$(ls -A "$project_dir")" ]]; then
+    rmdir "$project_dir"
+    parent="$(dirname "$project_dir")"
+    [[ -n "$(ls -A "$parent")" ]] || rmdir "$parent"
   fi
 done
 

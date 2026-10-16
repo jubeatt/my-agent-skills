@@ -7,3 +7,7 @@
 
 # npx skills lock / cache artifacts (if any land here)
 .skills/
+
+# Project-scope agent links created by `npx skills add/update`; scripts/link.sh prunes them
+/.claude/skills/
+/.kiro/skills/
