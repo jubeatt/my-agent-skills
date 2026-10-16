@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Keep agent skill links in step with skills added or removed in the repo.
+"$(git rev-parse --show-toplevel)/scripts/link.sh"

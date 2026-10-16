@@ -1,67 +1,58 @@
 # my-agent-skills
 
-個人的 [Agent Skills](https://agentskills.io) 策展庫，收齊我會用到的所有 skill（自建 + 第三方）。全部放在 `.agents/skills/` 一個資料夾，由 Kiro 透過**目錄 symlink 直接讀取**（edit-live），第三方 skill 則用 [`npx skills`](https://github.com/vercel-labs/skills) 從各自上游更新。
+個人的 [Agent Skills](https://agentskills.io) 策展庫，收齊我會用到的所有 skill（自建 + 第三方），供 Claude Code、Codex、Kiro 共用。全部放在 `.agents/skills/` 一個資料夾，各 agent 透過 **symlink 直接讀取**，改檔存檔即生效；第三方 skill 用 [`npx skills`](https://github.com/vercel-labs/skills) 從各自上游更新。
 
 ## 運作模型
 
 ```
-.agents/skills/  ←─(symlink)─  ~/.kiro/skills      # Kiro 直接讀，改檔即時生效
-      ↑
-      └─ npx skills update（在本 repo 內，從上游拉第三方新版）
+                       ┌─(目錄 symlink)── ~/.agents/skills          # Codex
+my-agent-skills/       │
+  .agents/skills/  ────┼─(目錄 symlink)── ~/.kiro/skills            # Kiro
+       ↑               │
+       │               └─(逐個 symlink)── ~/.claude/skills/<name>   # Claude Code
+       │
+       └─ npx skills add / update（在本 repo 內，從上游拉第三方）
 ```
 
-- **自建 skill**：手寫、手改，直接編輯 `.agents/skills/<name>/` 的檔案即可，馬上生效。
-- **第三方 skill**：由 `skills-lock.json` 追蹤來源，`npx skills update` 從上游拉新版，透過 symlink 即時反映。**請勿手改**。
+- **自建 skill**：直接編輯 `.agents/skills/<name>/`，存檔即生效。
+- **第三方 skill**：由 `skills-lock.json` 追蹤來源，只透過 `npx skills` 更新，**請勿手改**；想客製就另開一個自建 skill。
+- **Claude Code 為什麼逐個 link**：`~/.claude/skills/` 還放著 Claude Code 從 Claude.ai 帳號同步的 `synced/`，整個目錄不能換成 symlink，所以每個 skill 各建一條。
 
-## 首次設定（這台 / 新裝置）
+`scripts/link.sh` 負責建立以上所有 symlink，可重複執行：
+
+- 已正確的 link 不動，缺的補上。
+- `~/.claude/skills/` 中指向本 repo、但 skill 已不存在的 link 會被移除。
+- 目標位置若是實體檔案或資料夾，一律不碰，只回報並以非零狀態結束。
+
+## 首次設定（新裝置）
 
 ```bash
 # 1. clone repo
 git clone git@github.com:jubeatt/my-agent-skills.git ~/Projects/my-agent-skills
+cd ~/Projects/my-agent-skills
 
-# 2. 把 Kiro 的 skills 目錄指向 repo 的 .agents/skills（單一目錄 symlink）
-#    若 ~/.kiro/skills 已存在（舊安裝），先移除
-rm -rf ~/.kiro/skills
-ln -s ~/Projects/my-agent-skills/.agents/skills ~/.kiro/skills
+# 2. 建立各 agent 的 symlink（先預覽）
+scripts/link.sh --dry-run
+scripts/link.sh
 
-# 3.（選擇性）把第三方 skill 更新到最新
-cd ~/Projects/my-agent-skills && npx skills update
-
-# 4. 啟用 commit 後自動同步 Codex / Claude Code skills
+# 3. 啟用 git hooks：commit / pull / checkout 後自動補建或清除 Claude Code 的 link
 git config core.hooksPath .githooks
-chmod +x .githooks/post-commit
-```
-
-啟用後，每次 commit 完成時會自動執行
-`scripts/sync-skills.sh`，將 `.agents/skills/` 同步到 Codex（`~/.codex/skills`）
-與 Claude Code（`~/.claude/skills`）的 skills 目錄。同步會更新各 skill 的內容，
-並清除先前由此腳本同步、但主 repo 已不存在的 skill。腳本以目標目錄中的
-`.my-agent-skills-manifest` 記錄同步過的 skill，因此不會動到其他來源的 skill
-（例如 Codex 的 `.system/`、Claude 的 `synced/`）。
-
-```bash
-# Preview sync and pruning
-scripts/sync-skills.sh --dry-run
-
-# Update skills without pruning removed ones
-scripts/sync-skills.sh --no-prune
-
-# Sync to a specific target only (repeatable)
-scripts/sync-skills.sh --target ~/.claude/skills
 ```
 
 ## 日常維護
 
 ```bash
-# 改自建 skill：直接編輯 .agents/skills/<name>/，存檔即生效（push 保存到遠端）
+# 改 skill：直接編輯 .agents/skills/<name>/，存檔即生效
 
-# 更新第三方 skill（從上游拉新版，透過 symlink 即時反映）
-cd ~/Projects/my-agent-skills
-npx skills update
-git add -A && git commit -m "chore: update third-party skills" && git push
+# 新增自建 skill：建立 .agents/skills/<name>/SKILL.md
+# commit 時 hook 會自動建 Claude Code 的 link；想先試用可手動跑
+scripts/link.sh
 
-# 新增第三方 skill（-a universal 讓檔案落在 .agents/skills/）
+# 新增第三方 skill（-a universal 讓檔案落在 .agents/skills/，不要加 -g）
 npx skills add <owner>/<repo> --skill <name> -a universal -y
+
+# 更新第三方 skill（透過 symlink 即時反映）
+npx skills update
 
 # 移除第三方 skill
 npx skills remove <name> -y
