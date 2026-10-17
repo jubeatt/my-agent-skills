@@ -94,10 +94,6 @@ repo 的 coding 慣例可能放在不同地方，開審前逐一檢查下列位�
 
 寫成一份 Markdown 報告，檔名 `code-review-<scope>.md`（`<scope>` 用最新 commit 的 short hash；workspace mode 用 `workspace`），放在 repo 根目錄。章節順序如下，空群組省略，全文用繁體中文。
 
-### What is Done Well
-
-至少列一個具體正向觀察，引用實際檔案與模式。只在這裡講一次。
-
 ### Findings
 
 依嚴重度分組：Critical、Important、Suggestion。每條一行：
