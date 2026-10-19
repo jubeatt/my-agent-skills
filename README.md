@@ -4,18 +4,41 @@
 
 ## 運作模型
 
-```
-                       ┌─(目錄 symlink)── ~/.agents/skills          # Codex
-my-agent-skills/       │
-  .agents/skills/  ────┼─(目錄 symlink)── ~/.kiro/skills            # Kiro
-       ↑               │
-       │               └─(逐個 symlink)── ~/.claude/skills/<name>   # Claude Code
-       │
-       └─ npx skills add / update（在本 repo 內，從上游拉第三方）
+```mermaid
+flowchart LR
+  codex["Codex<br/>~/.agents/skills"]
+  kiro["Kiro<br/>~/.kiro/skills"]
+
+  subgraph claude["Claude Code · ~/.claude/skills/"]
+    cname["各 skill（一個一條）"]
+    cego["ego-browser"]
+    synced["synced/（Claude.ai 同步）"]
+  end
+
+  subgraph repo["my-agent-skills/.agents/skills/"]
+    own["自建 skill"]
+    third["第三方 skill"]
+    rego["ego-browser（gitignored）"]
+  end
+
+  subgraph app["ego lite App 管理"]
+    egoskills["~/.local/share/ego/ego-skills"]
+    bundle["ego lite.app/…/ego-browser"]
+  end
+
+  codex -- "目錄 symlink · link.sh" --> repo
+  kiro -- "目錄 symlink · link.sh" --> repo
+  cname -- "逐個 symlink · link.sh" --> own
+  cname -- "逐個 symlink · link.sh" --> third
+  cego -- "App 建立" --> egoskills
+  rego -- "手動建立，每台一次" --> egoskills
+  egoskills -- "跟著 App 版本" --> bundle
+  npx["npx skills add / update"] -. "從上游拉" .-> third
 ```
 
 - **自建 skill**：直接編輯 `.agents/skills/<name>/`，存檔即生效。
 - **第三方 skill**：由 `skills-lock.json` 追蹤來源，只透過 `npx skills` 更新，**請勿手改**；想客製就另開一個自建 skill。
+- **App 安裝的 skill**（目前只有 `ego-browser`）：檔案由 App 隨版本管理，repo 裡只放一條指向 App 安裝位置的 symlink，讓 Codex、Kiro 透過目錄 link 讀到。link 指向本機路徑，列在 `.gitignore`，每台裝了 App 的機器各自建立；Claude Code 那條由 App 自己建，`scripts/link.sh` 不碰。
 - **Claude Code 為什麼逐個 link**：`~/.claude/skills/` 還放著 Claude Code 從 Claude.ai 帳號同步的 `synced/`，整個目錄不能換成 symlink，所以每個 skill 各建一條。
 
 `scripts/link.sh` 負責建立以上所有 symlink，可重複執行：
@@ -38,6 +61,9 @@ scripts/link.sh
 
 # 3. 啟用 git hooks：commit / pull / checkout 後自動補建或清除 Claude Code 的 link
 git config core.hooksPath .githooks
+
+# 4.（有裝 ego lite 才需要）讓 Codex、Kiro 讀到 App 附的 ego-browser
+ln -s ~/.local/share/ego/ego-skills .agents/skills/ego-browser
 ```
 
 ## 日常維護

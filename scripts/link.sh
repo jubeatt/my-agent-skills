@@ -15,6 +15,10 @@ Claude Code's directory also holds skills from other sources (e.g. synced/),
 so it gets one link per skill. Links there that point into this repo but whose
 skill no longer exists are removed.
 
+Entries in .agents/skills/ that are themselves symlinks are skills installed
+by an outside app (e.g. ego-browser). They reach Codex and Kiro through the
+directory links, but get no Claude Code link here; the app manages that one.
+
 `npx skills add/update` also creates project-scope links in this repo
 (.claude/skills/, .kiro/skills/) pointing back at .agents/skills/. Those
 duplicate the links above, so they are removed too.
@@ -107,6 +111,8 @@ done
 shopt -s nullglob
 for skill_path in "$source_dir"/*; do
   [[ -d "$skill_path" && -f "$skill_path/SKILL.md" ]] || continue
+  # Externally installed skill; its app owns the Claude Code link
+  [[ ! -L "$skill_path" ]] || continue
   dest="$claude_dir/$(basename "$skill_path")"
   if [[ -L "$dest" && "$(readlink "$dest")" != "$source_dir"/* ]]; then
     conflict "$dest"

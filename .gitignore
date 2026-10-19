@@ -11,3 +11,6 @@
 # Project-scope agent links created by `npx skills add/update`; scripts/link.sh prunes them
 /.claude/skills/
 /.kiro/skills/
+
+# Skills installed by outside apps, linked in per machine (see README)
+/.agents/skills/ego-browser
