@@ -15,9 +15,10 @@ metadata:
 
 1. **界定範圍**：先取得使用者提供的 commit hash（或 commit range）界定這份 PR 涵蓋的變更。使用者沒給就請他提供並停止——拿到 commit hash 才繼續，不自己猜範圍。
 2. **檢視變更**：用唯讀 git（`git show`、`git diff`）看該範圍的實際變更，作為填寫各 section 的依據。
-3. **產出 md**：依下方模板與各 section 指引，把 PR body 寫成一份 Markdown 檔，檔名 `pr-<scope>.md`（`<scope>` 用範圍最新 commit 的 short hash），放 repo 根目錄。
+3. **視覺驗證**：變更改到使用者看得到的畫面時，依 [`VISUAL-EVIDENCE.md`](VISUAL-EVIDENCE.md) 開瀏覽器驗證並截圖。
+4. **產出 md**：依下方模板與各 section 指引，把 PR body 寫成一份 Markdown 檔，檔名 `pr-<scope>.md`（`<scope>` 用範圍最新 commit 的 short hash），放 repo 根目錄。
 
-**完成判準**：有 commit hash 界定的範圍、Summary／Evidence／Merge Danger 三段都依實際變更填好，並寫出 `pr-<scope>.md`。
+**完成判準**：有 commit hash 界定的範圍、Summary／Evidence／Merge Danger 三段都依實際變更填好，並寫出 `pr-<scope>.md`；視覺性變更附上截圖，或已向使用者回報沒拍成的畫面與原因。
 
 ## 模板
 
@@ -172,7 +173,7 @@ function expandSkill(command: string): string {
 
 用執行型證據：測試結果、console output。用 pseudocode 呈現那個現在會失敗、修好後會通過的確切測試。
 
-視覺性變更另留截圖佔位，寫明該截哪個畫面、什麼狀態，由使用者自行補圖，例如 `<截圖待補：結帳頁，購物車為空時>`。
+視覺性變更另附流程第 3 步拍的截圖，每張標明是哪個畫面、什麼狀態。
 
 ### Merge Danger
 
