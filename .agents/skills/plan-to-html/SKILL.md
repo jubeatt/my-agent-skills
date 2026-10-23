@@ -19,7 +19,7 @@ description: 把一次開發規劃產成一份高層次的 HTML 計畫檔，輸�
 
 ### 3. 產出 plan.html
 
-把規劃寫成 `.plan/<slug>/plan.html`，依下方「內容」與「HTML 形態」撰寫。**完成判準**：每個 phase 都有目標與一條可檢查的驗收標準，值得測的地方都附了測試建議，全篇停在高層次設計（HLD），沒有下到逐檔的實作細節，每個錨點連結的文字不跳轉也讀得懂；若這次跑過 grilling，HTML 內含一個 Q&A 紀錄 section。
+把規劃寫成 `.plan/<slug>/plan.html`，依下方「內容」與「HTML 形態」撰寫。**完成判準**：每個 phase 都有目標與一條可檢查的驗收標準，值得測的地方都附了測試建議，全篇停在高層次設計（HLD），沒有下到逐檔的實作細節，每個錨點連結的文字不跳轉也讀得懂，[`ELEMENTS.md`](../into-html/ELEMENTS.md) 的基本規則全部套用；若這次跑過 grilling，HTML 內含一個 Q&A 紀錄 section。
 
 ### 4. 迭代
 
@@ -40,6 +40,6 @@ description: 把一次開發規劃產成一份高層次的 HTML 計畫檔，輸�
 
 ## HTML 形態
 
-- 單一自含 `plan.html`：inline CSS、無外部相依、無 live server，用瀏覽器打開就能看全部內容。
-- 樣式只求好讀：標題層級、phase 分段、狀態用 badge、分隔線。視覺細節自由發揮。
+- 呈現依 [`ELEMENTS.md`](../into-html/ELEMENTS.md)：基本規則全部套用，可選元素依選用表挑。
+- 每個 phase 自成一段，狀態用 badge。
 
