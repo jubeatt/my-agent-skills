@@ -36,6 +36,7 @@ disable-model-invocation: true
 
 - 呈現依 [`ELEMENTS.md`](../into-html/ELEMENTS.md)：基本規則與元素規格照用，可選元素只拿來呈現上面三塊。
 - 圖上每個節點都是頁內連結，點擊跳到介面清單裡對應的那段。所有連結都只指向這份 HTML 內部。
+- 簽名與使用範例的程式碼區塊加語法高亮。
 - **位置**：目前 git repo 的根目錄，不在 repo 裡就放工作目錄。檔名 `pseudo-<slug>.html`，slug 是描述主題的 kebab-case；同名檔已存在就覆蓋。
 
 ### 4. 交付
