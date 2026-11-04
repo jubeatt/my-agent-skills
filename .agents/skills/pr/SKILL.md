@@ -48,6 +48,8 @@ metadata:
 
 文字精簡、直接進重點。沿用 `GLOSSARY.md` 裡使用者的領域語言。
 
+PR body 用繁體中文（zh-TW）撰寫。
+
 ### Summary
 
 挑能把重點講清楚的最小視圖。
