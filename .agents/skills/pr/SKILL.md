@@ -1,6 +1,6 @@
 ---
 name: pr
-description: 寫 PR body（PR 說明）時主動套用，用 Summary／Evidence／Merge Danger 模板產出說明。先要使用者給 commit hash 界定範圍，沒有就停止。
+description: 寫 PR body（PR 說明）時主動套用，用 Summary／Evidence／Merge Danger 模板產出說明，先要使用者給 commit hash 界定範圍，沒有就停止。也用於把看過的 pr-<scope>.md 連同截圖發佈到 GitHub PR。
 metadata:
   credits:
     skill: show-me
@@ -19,6 +19,10 @@ metadata:
 4. **產出 md**：依下方模板與各 section 指引，把 PR body 寫成一份 Markdown 檔，檔名 `pr-<scope>.md`（`<scope>` 用範圍最新 commit 的 short hash），放 repo 根目錄。
 
 **完成判準**：有 commit hash 界定的範圍、Summary／Evidence／Merge Danger 三段都依實際變更填好，並寫出 `pr-<scope>.md`；視覺性變更附上截圖，或已向使用者回報沒拍成的畫面與原因。
+
+## 發佈
+
+產出 md 後停在本機，由使用者審閱。使用者看過、要求把它寫進 GitHub PR 時，依 [`PUBLISH.md`](PUBLISH.md) 上傳截圖並寫入 PR body。
 
 ## 模板
 
