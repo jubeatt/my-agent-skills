@@ -29,7 +29,7 @@
       "source": "microsoft/playwright-cli",
       "sourceType": "github",
       "skillPath": "skills/playwright-cli/SKILL.md",
-      "computedHash": "56941c3c0464ad22ccdf3ec975fc4bd518c5daea34b73329c232bc1f37f9a6b7"
+      "computedHash": "0a6e4b6d897111df89926a2c57619f3893bd5c6aa716fee64e2f52c78492fc4c"
     },
     "retro": {
       "source": "mattpocock/skills",
@@ -42,7 +42,7 @@
       "ref": "main",
       "sourceType": "github",
       "skillPath": "pstack/skills/sharpen/SKILL.md",
-      "computedHash": "ea086554887a219066acf376daa032377f95645c62d691fdc91130d0961cc34f"
+      "computedHash": "61d64e8e7a7de89c18f0ce44eb365773bdefbd6027a692c0a5fb70170131e34f"
     },
     "vercel-composition-patterns": {
       "source": "vercel-labs/agent-skills",
