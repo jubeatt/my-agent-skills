@@ -25,6 +25,12 @@
       "skillPath": "skills/herdr/SKILL.md",
       "computedHash": "72177e911f55467de8737174072ec6bb08e30bbf62bceabcb69678e944398b18"
     },
+    "herdr-core": {
+      "source": "herdrdev/herdr-core",
+      "sourceType": "github",
+      "skillPath": "skills/herdr-core/SKILL.md",
+      "computedHash": "78cfe40e92fd136ede2a79de99e132f7b0786cc0c5f9a1d39d024a252d59661e"
+    },
     "playwright-cli": {
       "source": "microsoft/playwright-cli",
       "sourceType": "github",
